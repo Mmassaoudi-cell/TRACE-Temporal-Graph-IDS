@@ -142,15 +142,8 @@ python github/trace_model.py `
   --test  Data/KDD/kdd_test.csv
 ```
 
-The script prints accuracy, macro precision, macro recall, and macro F1.
 
-**Verified local output** for the leakage-safe packaged implementation:
 
-```text
-accuracy:        0.928628
-macro_precision: 0.962838
-macro_f1:        0.726920
-```
 
 ---
 
@@ -169,60 +162,6 @@ preprocessing described in the paper.
 
 All datasets use temporal sequences of length `T = 8` in the full configuration.
 
----
-
-## Results
-
-### NSL-KDD (5 classes)
-
-TRACE outperforms graph-based IDS baselines (E-GraphSAGE, Anomal-E) under the same
-fallback-graph setting. On this topology-poor benchmark it does not surpass the strongest
-flow-level LSTM on macro-F1 — an explicit, reported limitation when port/endpoint fields
-are absent.
-
-| Method | Acc (%) | Prec (%) | Rec (%) | F1 (%) |
-|--------|--------:|---------:|--------:|-------:|
-| Random Forest | 92.20 | 96.63 | 60.42 | 64.58 |
-| LSTM | 88.57 | 91.40 | 69.74 | **77.18** |
-| BiLSTM | 86.99 | 88.22 | 70.22 | 76.38 |
-| Static GCN | 90.60 | 63.10 | 61.94 | 62.48 |
-| E-GraphSAGE | 78.32 | 54.63 | 46.04 | 46.78 |
-| Anomal-E | 78.93 | 53.77 | 47.22 | 48.07 |
-| **TRACE** | **94.36** | 93.66 | 70.84 | 76.21 |
-
-### RT-IoT2022 (12 classes, hardened: 2% training data + noisy test features)
-
-| Method | Acc (%) | Prec (%) | Rec (%) | F1 (%) |
-|--------|--------:|---------:|--------:|-------:|
-| Random Forest | 97.27 | 92.82 | 81.02 | 82.20 |
-| ExtraTrees | 97.90 | 91.56 | 89.23 | 89.38 |
-| XGBoost | 67.37 | 47.94 | 52.36 | 44.22 |
-| **TRACE** | **98.71** | 87.80 | **91.55** | 88.89 |
-
-### Automatic GNN depth selection (Dirichlet energy)
-
-| Dataset | Graph | E₁/E₀ | E₃/E₀ | Depth |
-|---------|-------|------:|------:|------:|
-| NSL-KDD | Fallback percentile | 0.1544 | 0.0089 | 1 |
-| UNSW-NB15 | Fallback percentile | 0.1038 | 0.0062 | 1 |
-| RT-IoT2022 | Residual protocol-role | 0.6839 | 0.3430 | 3 |
-
-Topology-poor fallback graphs lose >84% of initial Dirichlet energy after one aggregation
-step (depth → 1), while the RT-IoT2022 protocol-role graph retains enough structure to
-justify a 3-layer NNConv+GAT encoder.
-
-### Scalability
-
-Vectorized batch inference stays below **6 ms/sequence** from 10 to 1,000 nodes — well
-within a 200 ms real-time target.
-
-### Attack-path analysis
-
-On RT-IoT2022, the top attention-ranked protocol-role paths include
-`Registered Source → NTP Server`, `Ephemeral Client → SSH Server`, and NetBIOS-bound
-channels, consistent with NTP manipulation, SSH brute-force, and NMAP scanning.
-
----
 
 ## Citation
 
