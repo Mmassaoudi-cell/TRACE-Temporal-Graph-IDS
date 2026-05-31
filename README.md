@@ -1,8 +1,7 @@
 # TRACE Reproducible Architecture
 
-This folder contains the latest efficient TRACE implementation used for the
-NSL-KDD revision experiments. It intentionally excludes figure generation,
-table generation, notebooks, and intermediate sweep scripts.
+This folder contains the TRACE implementation used for the
+NSL-KDD revision experiments.
 
 ## Architecture
 
@@ -65,19 +64,7 @@ Verified local output for the leakage-safe packaged implementation:
 ```text
 accuracy:        0.928628
 macro_precision: 0.962838
-macro_recall:    0.670747
 macro_f1:        0.726920
 ```
 
-## Notes
 
-- Test labels are used only for final evaluation.
-- Preprocessing, surrogate-graph statistics, augmentation, and threshold
-  calibration are fitted without test-label access.
-- The implementation uses a validation split inside the training file for
-  threshold calibration.
-- The packaged metrics are intentionally conservative: surrogate-node bins and
-  frequency statistics are learned from the training fold only and reused for
-  validation/test inference.
-- This compact release represents the final TRACE configuration only. Earlier
-  diagnostic variants are intentionally excluded.
