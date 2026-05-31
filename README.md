@@ -15,7 +15,7 @@ edge-conditioned message passing, models the temporal evolution of multi-stage a
 campaigns, and produces analyst-interpretable attack-propagation paths via graph attention.
 
 > Official implementation of the IECON 2026 paper by Massaoudi, Ez Eddin, Refaat, and Davis.
-> Repository: ![The TRACE Architecture for Industrial IoT Intrusion Detection](assets/trace_architecture.png)
+> Repository: ![The TRACE Architecture for Industrial IoT Intrusion Detection](trace_architecture.png)
 
 ---
 
