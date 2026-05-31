@@ -15,7 +15,7 @@ edge-conditioned message passing, models the temporal evolution of multi-stage a
 campaigns, and produces analyst-interpretable attack-propagation paths via graph attention.
 
 > Official implementation of the IECON 2026 paper by Massaoudi, Ez Eddin, Refaat, and Davis.
-> Repository: <https://github.com/Mmassaoudi-cell/TRACE-Temporal-Graph-IDS/blob/main/Picture%201.png>
+> Repository: https://github.com/Mmassaoudi-cell/TRACE-Temporal-Graph-IDS/blob/main/Picture%201.png
 
 ---
 
